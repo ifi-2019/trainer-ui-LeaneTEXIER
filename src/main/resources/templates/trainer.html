@@ -6,9 +6,13 @@
             <div class="col-md-3">
                 <div class="card shadow-sm mb-3">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Pokemon : {{pokemonType}}</h4>
+                        <h4 class="my-0 font-weight-normal">Pokemon : {{type.name}}
+                            <span class="badge badge-secondary">Id {{pokemonType}}</span>
+                        </h4>
                     </div>
+                    <img class="card-img-top" src="{{type.sprites.front_default}}" alt="Pokemon"/>
                     <div class="card-body">
+
                         <span class="badge badge-primary">Level : {{level}}</span>
                     </div>
                 </div>

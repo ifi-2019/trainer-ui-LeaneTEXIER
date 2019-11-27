@@ -2,6 +2,7 @@ package com.ifi.trainer_ui.trainers.service;
 
 import com.ifi.trainer_ui.pokemonTypes.bo.PokemonType;
 import com.ifi.trainer_ui.pokemonTypes.service.PokemonTypeService;
+import com.ifi.trainer_ui.trainers.bo.Pokemon;
 import com.ifi.trainer_ui.trainers.bo.Trainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ public class TrainerServiceImpl implements TrainerService {
 
     private RestTemplate restTemplate;
     private String trainerServiceUrl;
+    private PokemonTypeService pokemonTypeService;
 
     public List<Trainer> listTrainers(){
         var url = trainerServiceUrl + "/trainers/";
@@ -25,7 +27,11 @@ public class TrainerServiceImpl implements TrainerService {
 
     public Trainer getTrainer(String name) {
         var url = trainerServiceUrl + "/trainers/{name}";
-        return restTemplate.getForObject(url, Trainer.class, name);
+        var trainer = restTemplate.getForObject(url, Trainer.class, name);
+        for (Pokemon pokemon: trainer.getTeam()) {
+            pokemon.setType(pokemonTypeService.getPokemonType(pokemon.getPokemonType()));
+        }
+        return trainer;
     }
 
     @Autowired
@@ -36,5 +42,10 @@ public class TrainerServiceImpl implements TrainerService {
     @Value("${trainer.service.url}")
     void setTrainerServiceUrl(String trainerServiceUrl) {
         this.trainerServiceUrl = trainerServiceUrl;
+    }
+
+    @Autowired
+    void setPokemonTypeService(PokemonTypeService pokemonTypeService) {
+        this.pokemonTypeService = pokemonTypeService;
     }
 }
