@@ -1,0 +1,19 @@
+{{> layout/header}}
+    <body>
+        <div class="container">
+            <h1 class="pt-md-5 pb-md-5">{{trainer.name}}</h1>
+            {{#trainer.team}}
+            <div class="col-md-3">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Pokemon : {{pokemonType}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge badge-primary">Level : {{level}}</span>
+                    </div>
+                </div>
+            </div>
+            {{/trainer.team}}
+        </div>
+    </body>
+</html>

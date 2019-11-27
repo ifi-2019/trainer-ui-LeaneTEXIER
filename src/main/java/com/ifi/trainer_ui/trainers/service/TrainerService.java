@@ -8,4 +8,6 @@ public interface TrainerService {
 
     List<Trainer> listTrainers();
 
+    Trainer getTrainer(String name);
+
 }

@@ -23,6 +23,11 @@ public class TrainerServiceImpl implements TrainerService {
         return listTrainers;
     }
 
+    public Trainer getTrainer(String name) {
+        var url = trainerServiceUrl + "/trainers/{name}";
+        return restTemplate.getForObject(url, Trainer.class, name);
+    }
+
     @Autowired
     void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
