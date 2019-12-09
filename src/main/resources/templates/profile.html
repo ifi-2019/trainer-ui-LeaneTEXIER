@@ -1,8 +1,8 @@
 {{> layout/header}}
     <body>
         <div class="container">
-            <h1 class="pt-md-5 pb-md-5">{{trainer.name}}</h1>
-            {{#trainer.team}}
+            <h1 class="pt-md-5 pb-md-5">{{profile.name}}</h1>
+            {{#profile.team}}
             <div class="col-md-3">
                 <div class="card shadow-sm mb-3">
                     <div class="card-header">
@@ -12,11 +12,14 @@
                     </div>
                     <img class="card-img-top" src="{{type.sprites.front_default}}" alt="Pokemon"/>
                     <div class="card-body">
-                        <span class="badge badge-primary">Level : {{level}}</span>
+                        <span class="badge badge-primary">Speed : {{type.stats.speed}}</span>
+                        <span class="badge badge-primary">Attack : {{type.stats.attack}}</span>
+                        <span class="badge badge-primary">Defense : {{type.stats.defense}}</span>
+                        <span class="badge badge-primary">HP : {{type.stats.hp}}</span>
                     </div>
                 </div>
             </div>
-            {{/trainer.team}}
+            {{/profile.team}}
         </div>
     </body>
 </html>
