@@ -1,7 +1,6 @@
 package com.ifi.trainer_ui.pokemonTypes.service;
 
 import com.ifi.trainer_ui.pokemonTypes.bo.PokemonType;
-import com.ifi.trainer_ui.trainers.bo.Trainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

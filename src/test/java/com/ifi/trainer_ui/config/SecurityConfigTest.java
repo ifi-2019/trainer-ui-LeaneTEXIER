@@ -1,9 +1,9 @@
 package com.ifi.trainer_ui.config;
 
-
 import com.ifi.trainer_ui.trainers.bo.Trainer;
 import com.ifi.trainer_ui.trainers.service.TrainerService;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class SecurityConfigTest {
+
+    @Test
+    void securityConfig_shouldBeAConfiguration(){
+        assertNotNull(SecurityConfig.class.getAnnotation(Configuration.class));
+    }
 
     @Test
     void securityConfig_shouldExtendWebSecurityConfigurerAdapter(){

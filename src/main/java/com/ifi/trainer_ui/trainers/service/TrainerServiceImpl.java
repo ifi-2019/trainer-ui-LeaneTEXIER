@@ -1,6 +1,5 @@
 package com.ifi.trainer_ui.trainers.service;
 
-import com.ifi.trainer_ui.pokemonTypes.bo.PokemonType;
 import com.ifi.trainer_ui.pokemonTypes.service.PokemonTypeService;
 import com.ifi.trainer_ui.trainers.bo.Pokemon;
 import com.ifi.trainer_ui.trainers.bo.Trainer;
@@ -20,14 +19,19 @@ public class TrainerServiceImpl implements TrainerService {
     private String trainerServiceUrl;
     private PokemonTypeService pokemonTypeService;
 
-    public List<Trainer> listTrainers(){
-        var url = trainerServiceUrl + "/trainers/";
-        var listTrainers = Arrays.asList(restTemplate.getForObject(url, Trainer[].class));
-        return listTrainers;
+    public List<Trainer> listTrainers(String name){
+        var url = trainerServiceUrl + "/trainers/{name}";
+        var trainers = Arrays.asList(restTemplate.getForObject(url, Trainer[].class, name));
+        for(Trainer trainer : trainers){
+            for (Pokemon pokemon: trainer.getTeam()) {
+                pokemon.setType(pokemonTypeService.getPokemonType(pokemon.getPokemonType()));
+            }
+        }
+        return trainers;
     }
 
     public Trainer getTrainer(String name) {
-        var url = trainerServiceUrl + "/trainers/{name}";
+        var url = trainerServiceUrl + "/trainer/{name}";
         var trainer = restTemplate.getForObject(url, Trainer.class, name);
         for (Pokemon pokemon: trainer.getTeam()) {
             pokemon.setType(pokemonTypeService.getPokemonType(pokemon.getPokemonType()));

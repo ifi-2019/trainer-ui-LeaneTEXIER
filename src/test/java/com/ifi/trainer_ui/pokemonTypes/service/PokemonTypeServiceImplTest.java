@@ -13,6 +13,11 @@ import static org.mockito.Mockito.*;
 class PokemonTypeServiceImplTest {
 
     @Test
+    void pokemonServiceImpl_shouldBeAnnotatedWithService(){
+        assertNotNull(PokemonTypeServiceImpl.class.getAnnotation(Service.class));
+    }
+
+    @Test
     void listPokemonsTypes_shouldCallTheRemoteService() {
         var url = "http://localhost:8080";
 
@@ -37,8 +42,28 @@ class PokemonTypeServiceImplTest {
     }
 
     @Test
-    void pokemonServiceImpl_shouldBeAnnotatedWithService(){
-        assertNotNull(PokemonTypeServiceImpl.class.getAnnotation(Service.class));
+    void getPokemonType_shouldCallTheRemoteService() {
+        var url = "http://localhost:8080";
+
+        var restTemplate = mock(RestTemplate.class);
+        var pokemonServiceImpl = new PokemonTypeServiceImpl();
+        pokemonServiceImpl.setRestTemplate(restTemplate);
+        pokemonServiceImpl.setPokemonTypeServiceUrl(url);
+
+        var pikachu = new PokemonType();
+        pikachu.setName("pikachu");
+        pikachu.setId(25);
+
+        var expectedUrl = "http://localhost:8080/pokemon-types/{id}";
+        when(restTemplate.getForObject(expectedUrl, PokemonType.class, 25)).thenReturn(pikachu);
+
+        var result_pikachu = pokemonServiceImpl.getPokemonType(25);
+
+        assertNotNull(result_pikachu);
+        assertEquals(25, result_pikachu.getId());
+        assertEquals("pikachu", result_pikachu.getName());
+
+        verify(restTemplate).getForObject(expectedUrl, PokemonType.class, 25);
     }
 
     @Test

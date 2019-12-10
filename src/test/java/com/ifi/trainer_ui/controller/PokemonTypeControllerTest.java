@@ -18,7 +18,7 @@ class PokemonTypeControllerTest {
     }
 
     @Test
-    void pokemons_shouldReturnAModelAndView() {
+    void pokedex_shouldReturnAModelAndView() {
         var pokemonTypeService = mock(PokemonTypeService.class);
 
         when(pokemonTypeService.listPokemonsTypes()).thenReturn(List.of(new PokemonType(), new PokemonType()));
@@ -34,7 +34,7 @@ class PokemonTypeControllerTest {
     }
 
     @Test
-    void pokemons_shouldBeAnnotated() throws NoSuchMethodException {
+    void pokedex_shouldBeAnnotated() throws NoSuchMethodException {
         var pokemonsMethod = PokemonTypeController.class.getDeclaredMethod("pokedex");
         var getMapping = pokemonsMethod.getAnnotation(GetMapping.class);
 

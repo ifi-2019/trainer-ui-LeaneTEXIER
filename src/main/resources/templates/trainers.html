@@ -9,6 +9,12 @@
                         <div class="card-header">
                             <h4 class="my-0 font-weight-normal">{{name}}</h4>
                         </div>
+                        {{#team}}
+                        <img class="card-img-top" src="{{type.sprites.front_default}}" alt="Pokemon"/>
+                        <div class="card-body">
+                            <span class="badge badge-primary">Level : {{level}}</span>
+                        </div>
+                        {{/team}}
                     </div>
                 </div>
                 {{/trainers}}
